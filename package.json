@@ -5,14 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Bookclub",
     "API"
   ],
-  "author": "Brenda Gilisho",
+  "author": "Catherine Muthoni and Liplan Lekipising",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",

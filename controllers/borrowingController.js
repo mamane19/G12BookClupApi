@@ -1,20 +1,20 @@
-import Borrow from "../models/borrowing.model.js";
+import Borrowing from "../models/borrowing.model.js";
 
 
-//Borrow book
-export async function borrowBook(req, res) {
+//Add a book borrowing
+export async function addBorrowing(req, res) {
     try {
-        let borrow = await Borrow.create(req.body);
-        if (borrow) {
+        let borrowing = await Borrowing.create(req.body);
+        if (borrowing) {
             res.status(200).json({
                 success: true,
-                message: 'Borrow record created successfully',
-                data: borrow
+                message: 'Borrowing created successfully',
+                data: borrowing
             })
         } else {
             res.status(200).json({
                 success: true,
-                message: 'Borrow record could not be created at this time'
+                message: 'Borrowing could not be created at this time'
             })
         }
     } catch (err) {
@@ -24,28 +24,22 @@ export async function borrowBook(req, res) {
             message: "Oopss! Something is wrong..."
         })
     }
-}
-
-// return book
-export function returnBook(req, res) {
-    console.log(req.body);
-    res.send(req.body)
 }
 
 //View a borrowing
 export async function viewBorrowing(req, res) {
     try {
-        let allborrowings = await Borrow.findAll();
+        let allborrowings = await Borrowing.findAll({where: {borrowing_id: req.params.id}});
         if (allborrowings) {
             res.json({
                 success: true,
-                message: 'Borrowing record retrieved successfully',
+                message: 'Borrowing records retrieved successfully',
                 data: allborrowings
             })
         } else {
             res.json({
                 success: true,
-                message: 'No borrowing records found.',
+                message: 'No Borrowing records found.',
             })
         }
     } catch (err) {
@@ -57,20 +51,20 @@ export async function viewBorrowing(req, res) {
     }
 }
 
-//View all borrowing of a member
-export async function viewAllBorrowing(req, res) {
+//View all borrowings
+export async function viewAllBorrowings(req, res) {
     try {
-        let allmemberborrowing = await Borrow.findAll({ where: { member_id: req.params.id } });
-        if (allmemberborrowing) {
+        let allborrowings = await Borrowing.findAll();
+        if (allborrowings) {
             res.json({
                 success: true,
-                message: 'Member borrowing records retrieved successfully',
-                data: allmemberborrowing
+                message: 'Borrowing records retrieved successfully',
+                data: allborrowings
             })
         } else {
             res.json({
                 success: true,
-                message: 'No Member borrowing records found.',
+                message: 'No Borrowing records found.',
             })
         }
     } catch (err) {
@@ -82,3 +76,54 @@ export async function viewAllBorrowing(req, res) {
     }
 }
 
+//Update borrowing record
+export async function returnBook(req, res) {
+    try {
+        
+        let updatedBorrow = await Borrowing.update(req.body,{where:{borrowing_id: req.params.id}});
+        if (updatedBorrow) {
+            res.json({
+                success: true,
+                message: 'Book records updated successfully',
+                data: updatedBorrow
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'No Book records found.',
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Oopss! Something is wrong..."
+        })
+    }
+}
+//View all borrowings of a particular member
+export async function viewMemberBorrowings(req, res) {
+    try {
+        
+        let memberBorrowings = await Borrowing.findAll({where:{borrower_name: req.params.borrower_name}});
+        if (memberBorrowings) {
+            res.json({
+                success: true,
+                message: 'Book records retrieved successfully',
+                data: memberBorrowings
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'No Book records found.',
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Oopss! Something is wrong..."
+        })
+    }
+
+}

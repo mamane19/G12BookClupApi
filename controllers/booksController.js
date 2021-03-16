@@ -1,10 +1,10 @@
-import Member from "../models/books.model.js";
+import Books from "../models/books.model.js"
 
 
-//Add/Create a book
-export async function addbook(req, res) {
+//Add a Book
+export async function addBook(req, res) {
     try {
-        let book = await Book.create(req.body);
+        let book = await Books.create(req.body);
         if (book) {
             res.status(200).json({
                 success: true,
@@ -29,17 +29,17 @@ export async function addbook(req, res) {
 //View a book
 export async function viewBook(req, res) {
     try {
-        let allbooks = await Book.findAll({ where: { book_id: req.params.id } });
+        let allbooks = await Books.findAll({where: {ID: req.params.id}});
         if (allbooks) {
             res.json({
                 success: true,
-                message: 'Book record retrieved successfully',
+                message: 'Book records retrieved successfully',
                 data: allbooks
             })
         } else {
             res.json({
                 success: true,
-                message: 'No book record found.',
+                message: 'No Book records found.',
             })
         }
     } catch (err) {
@@ -54,17 +54,43 @@ export async function viewBook(req, res) {
 //View all books
 export async function viewAllBooks(req, res) {
     try {
-        let allbooks = await Book.findAll();
+        let allbooks = await Books.findAll();
         if (allbooks) {
             res.json({
                 success: true,
-                message: 'Books record retrieved successfully',
+                message: 'Book records retrieved successfully',
                 data: allbooks
             })
         } else {
             res.json({
                 success: true,
-                message: 'No books records found.',
+                message: 'No Book records found.',
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Oopss! Something is wrong..."
+        })
+    }
+}
+
+//Update book record
+export async function updateBook(req, res) {
+    try {
+        
+        let updatedBook = await Books.update(req.body,{where:{ID: req.params.id}});
+        if (updatedBook) {
+            res.json({
+                success: true,
+                message: 'Book records updated successfully',
+                data: updatedBook
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'No Book records found.',
             })
         }
     } catch (err) {
@@ -77,7 +103,32 @@ export async function viewAllBooks(req, res) {
 }
 
 //Delete a book
-export function deleteBook(req, res) {
-    console.log(req.body);
-    res.send(req.body)
+export async function deleteBook(req, res) {
+    try {
+        
+        let bookToDelete = await Books.findAll({where:{ID:req.params.id}});
+        if (bookToDelete) {
+            let deletedBook = await Books.destroy({where:{ID:req.params.id}});
+            if (deletedBook){
+                res.json({
+                    success: true,
+                    message: 'Book records deleted successfully',
+                    
+                })
+            } else {
+                res.json({
+                    success: true,
+                    message: 'No Book records found.',
+                })
+            }
+
+        }
+            
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Oopss! Something is wrong..."
+        })
+    }
 }

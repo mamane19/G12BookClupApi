@@ -1,19 +1,15 @@
+
 import express from "express";
 import membersRouter from "./membersRouter.js"
-import usersRouter from "./usersRouter.js"
 import booksRouter from "./booksRouter.js"
-import borrowRouter from "./borrowRouter.js"
-
-
+import borrowingRouter from "./borrowingRouter.js";
 
 const router = express.Router();
 
 
 router.use("/members", membersRouter);
-router.use("/users", usersRouter);
 router.use("/books", booksRouter);
-router.use("/borrow", borrowRouter);
-
+router.use("/borrow",borrowingRouter);
 
 
 export default router;

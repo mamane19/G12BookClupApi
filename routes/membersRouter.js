@@ -1,24 +1,24 @@
 import express from "express";
 import { addMember, viewAllMembers, viewMember, updateMember, deleteMember } from '../controllers/membersController.js'
 
-const memberRouter = express.Router();
+const membersRouter = express.Router();
 
 //Add a Member
-memberRouter.post("/", addMember);
+membersRouter.post("/", addMember);
 
 //View a member members/:id
-memberRouter.get("/:id", viewMember);
+membersRouter.get("/:id", viewMember);
 
 //View all members members/
-memberRouter.get("/", viewAllMembers);
+membersRouter.get("/", viewAllMembers);
 
 //Update member record members/
-memberRouter.put("/", updateMember);
+membersRouter.put("/:id", updateMember);
 
 //Delete a member members/:id
-memberRouter.delete("/:id", deleteMember);
+membersRouter.delete("/:id", deleteMember);
 
-export default memberRouter;
+export default membersRouter;
 
 
 
