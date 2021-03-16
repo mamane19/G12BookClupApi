@@ -1,20 +1,19 @@
 import express from "express";
 import { addUser, viewAllUsers, viewUser, signIn } from '../controllers/usersController.js'
-import { authenticate } from '../middlewares/auth.js';
 
 const usersRouter = express.Router();
 
-//Add a User - Sign Up - Authenticate.
-usersRouter.post("/", authenticate, addUser);
+//Add a user - Sign up
+usersRouter.post("/", addUser);
 
-//Add a User - Sign In - No need of Authentication
-usersRouter.post("/signin", signIn);
+//Add a user - Sign in
+usersRouter.post("/", signIn);
 
-//View a User users/:id - Authenticate.
-usersRouter.get("/:id", authenticate, viewUser);
+//View a user users/:id
+usersRouter.get("/:id", viewUser);
 
-//View all Users users/ - Authenticate.
-usersRouter.get("/", authenticate, viewAllUsers);
+//View all users users/
+usersRouter.get("/", viewAllUsers);
 
 
 export default usersRouter;

@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../db/dbConnect.js";
 
-const Member = sequelize.define('member', {
+const Borrow = sequelize.define('borrowing', {
     member_id: {
         autoincrement: true,
         type: Sequelize.INTEGER,
@@ -12,33 +12,22 @@ const Member = sequelize.define('member', {
         type: Sequelize.STRING(255),
         allowNull: false
     },
-    member_gender: {
-        type: Sequelize.STRING(30),
-        allowNull: false
-    },
-    email_address: {
+    title: {
         type: Sequelize.STRING(255),
         allowNull: false
-    },
-    telephone_number: {
-        type: Sequelize.STRING(255),
-        allowNull: false
-    },
-    date_of_birth: {
+      },
+    date_borrowed: {
         type: Sequelize.DATE,
         allowNull: false
     },
-    address: {
-        type: Sequelize.STRING(255),
+    return_date: {
+        type: Sequelize.DATE,
         allowNull: false
     },
-    referral_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    }
+    
 }, {
     sequelize,
-    tableName: 'member',
+    tableName: 'borrowing',
     timestamps: false,
     indexes: [{
         name: "PRIMARY",
@@ -49,4 +38,4 @@ const Member = sequelize.define('member', {
     }]
 });
 
-export default Member;
+export default Borrow;

@@ -1,20 +1,20 @@
-import Member from "../models/members.model.js";
+import Member from "../models/books.model.js";
 
 
-//Add a Member
-export async function addMember(req, res) {
+//Add/Create a book
+export async function addbook(req, res) {
     try {
-        let member = await Member.create(req.body);
-        if (member) {
+        let book = await Book.create(req.body);
+        if (book) {
             res.status(200).json({
                 success: true,
-                message: 'Member created successfully',
-                data: member
+                message: 'Book created successfully',
+                data: book
             })
         } else {
             res.status(200).json({
                 success: true,
-                message: 'Member could not be created at this time'
+                message: 'Book could not be created at this time'
             })
         }
     } catch (err) {
@@ -26,20 +26,20 @@ export async function addMember(req, res) {
     }
 }
 
-//View a member
-export async function viewMember(req, res) {
+//View a book
+export async function viewBook(req, res) {
     try {
-        let allmembers = await Member.findAll({ where: { member_id: req.params.id } });
-        if (allmembers) {
+        let allbooks = await Book.findAll({ where: { book_id: req.params.id } });
+        if (allbooks) {
             res.json({
                 success: true,
-                message: 'Member records retrieved successfully',
-                data: allmembers
+                message: 'Book record retrieved successfully',
+                data: allbooks
             })
         } else {
             res.json({
                 success: true,
-                message: 'No Member records found.',
+                message: 'No book record found.',
             })
         }
     } catch (err) {
@@ -51,20 +51,20 @@ export async function viewMember(req, res) {
     }
 }
 
-//View all members
-export async function viewAllMembers(req, res) {
+//View all books
+export async function viewAllBooks(req, res) {
     try {
-        let allmembers = await Member.findAll();
-        if (allmembers) {
+        let allbooks = await Book.findAll();
+        if (allbooks) {
             res.json({
                 success: true,
-                message: 'Member records retrieved successfully',
-                data: allmembers
+                message: 'Books record retrieved successfully',
+                data: allbooks
             })
         } else {
             res.json({
                 success: true,
-                message: 'No Member records found.',
+                message: 'No books records found.',
             })
         }
     } catch (err) {
@@ -76,14 +76,8 @@ export async function viewAllMembers(req, res) {
     }
 }
 
-//Update member record
-export function updateMember(req, res) {
-    console.log(req.body);
-    res.send(req.body)
-}
-
-//Delete a member
-export function deleteMember(req, res) {
+//Delete a book
+export function deleteBook(req, res) {
     console.log(req.body);
     res.send(req.body)
 }

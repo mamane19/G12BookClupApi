@@ -1,25 +1,24 @@
 import express from "express";
 import { addMember, viewAllMembers, viewMember, updateMember, deleteMember } from '../controllers/membersController.js'
-import { authenticate } from '../middlewares/auth.js';
 
-const membersRouter = express.Router();
+const memberRouter = express.Router();
 
 //Add a Member
-membersRouter.post("/", authenticate, addMember);
+memberRouter.post("/", addMember);
 
 //View a member members/:id
-membersRouter.get("/:id", authenticate, viewMember);
+memberRouter.get("/:id", viewMember);
 
 //View all members members/
-membersRouter.get("/", authenticate, viewAllMembers);
+memberRouter.get("/", viewAllMembers);
 
 //Update member record members/
-membersRouter.put("/:id", authenticate, updateMember);
+memberRouter.put("/", updateMember);
 
 //Delete a member members/:id
-membersRouter.delete("/:id", authenticate, deleteMember);
+memberRouter.delete("/:id", deleteMember);
 
-export default membersRouter;
+export default memberRouter;
 
 
 

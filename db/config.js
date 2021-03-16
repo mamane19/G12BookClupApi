@@ -7,7 +7,7 @@ const dbConfig = {
     USER: process.env.DB_USER,
     PASSWORD: process.env.DB_PASS,
     DB: process.env.DB_NAME,
-    dialect: "mysql", //TODO: should be "mysql"
+    dialect: "mysql",
     pool: {
         max: 5,
         min: 0,

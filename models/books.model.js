@@ -2,38 +2,51 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../db/dbConnect.js";
 
-const User = sequelize.define('users', {
-  user_id: {
+const Book = sequelize.define('book', {
+  book_id: {
     autoIncrement: true,
     type: Sequelize.BIGINT,
     allowNull: false,
     primaryKey: true
   },
-  full_name: {
+  title: {
     type: Sequelize.STRING(255),
     allowNull: false
   },
-  email_address: {
+  author: {
     type: Sequelize.STRING(255),
     allowNull: false
   },
-  password: {
+  publish_date: {
+    type: Sequelize.DATEONLY,
+    allowNull: false
+  },
+  isbn: {
     type: Sequelize.STRING(255),
     allowNull: false
-  }, 
+  },
+  no_of_copies: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  genre: {
+    type: Sequelize.STRING(255),
+    allowNull: false
+  }
 }, {
   sequelize,
-  tableName: 'users',
+  tableName: 'books',
   timestamps: false,
   indexes: [
     {
       name: "PRIMARY",
       unique: true,
+      using: "BTREE",
       fields: [
-        { name: "user_id" },
+        { name: "book_id" },
       ]
     },
   ]
 });
 
-export default User;
+export default Book;
