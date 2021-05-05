@@ -4,9 +4,9 @@ import { sequelize } from "../db/dbConnect.js";
 
 const Borrow = sequelize.define('borrow', {
     borrow_id: {
-        autoincrement: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true
     },
     borrower_name: {
